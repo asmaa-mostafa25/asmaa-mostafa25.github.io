@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Asmaa Mostafa — Backend .NET Developer</title>
+<meta name="description" content="Asmaa Mostafa Mohamed — Junior Backend .NET Developer. ASP.NET Core, EF Core, SQL Server, Clean Architecture. Team Leader of BloodFlow.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* VOICE: a confident engineer's personal site — calm, precise, warm enough to feel human
+   IDEA: a backend control room — her API running live beside her portrait
+   PICTURE: portrait in a red ring + terminal of live requests; Clean Architecture panel in the case study
+   COLOUR and TYPE: near-black hero, steel panels, blood-red accent (BloodFlow); Inter Tight + Inter, mono for code
+   LAYOUT: dark hero → stats strip → about → featured case study → projects → skills → journey + certificates → contact */
+:root{color-scheme:light dark;
+--bg:light-dark(#eef1f4,#111417);--panel:light-dark(#fff,#1a1e22);--ink:light-dark(#0d0f11,#eef1f3);
+--mute:light-dark(#525c65,#a3adb5);--line:light-dark(#d3d9df,#2b3137);--red:#d81b60;--red2:#ff4d8d;
+--redSoft:light-dark(#fde4ee,#3a1526);--night:#0b0d0f;--night2:#15191d}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+a{color:inherit}
+h1,h2,h3{font-family:"Inter Tight",Inter,sans-serif;line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h2{font-size:clamp(30px,4vw,44px)}
+h3{font-size:19px}
+.wrap{max-width:1200px;margin:0 auto}
+.band{padding:clamp(56px,7vw,104px) max(5vw,18px)}
+.kicker{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;color:var(--red);margin-bottom:12px}
+.kicker::before{content:"";width:22px;height:2px;background:var(--red)}
+.lead{color:var(--mute);font-size:17px;max-width:62ch;margin:14px 0 0}
+nav{position:fixed;inset:0 0 auto;z-index:10;transition:background .25s,border-color .25s;border-bottom:1px solid transparent}
+nav.solid{background:color-mix(in srgb,var(--night) 92%,transparent);backdrop-filter:blur(10px);border-color:#23282d}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px max(5vw,18px)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font:700 17px "Inter Tight",Inter,sans-serif}
+.mono{width:34px;height:34px;border-radius:10px;background:var(--red);display:grid;place-items:center;font-size:14px;color:#fff}
+.links{display:flex;gap:2px}
+.links a{color:#b8c1c8;text-decoration:none;font-size:15px;padding:8px 12px;border-radius:8px}
+.links a:hover,.links a:focus-visible{color:#fff;background:#1f2429}
+.navcta{color:#fff;text-decoration:none;font-weight:600;font-size:14px;border:1px solid #3a4148;padding:8px 14px;border-radius:9px}
+.navcta:hover{border-color:var(--red)}
+.hero{background:radial-gradient(1200px 600px at 85% 10%,#2e0b22 0,transparent 60%),var(--night);color:#eef1f3;padding-top:clamp(110px,12vw,150px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.status{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:#cfd6dc;border:1px solid #2c3338;background:#14181b;padding:6px 13px;border-radius:999px;margin-bottom:22px}
+.status i{width:8px;height:8px;border-radius:50%;background:#2ec26a;box-shadow:0 0 0 4px rgba(46,194,106,.18)}
+.hero h1{font-size:clamp(44px,6.6vw,82px);font-weight:800;letter-spacing:-.03em}
+.hero h1 span{color:var(--red2)}
+.role{font:600 clamp(19px,2.2vw,24px)/1.3 "Inter Tight",Inter,sans-serif;margin:16px 0 0;color:#dfe5ea;min-height:1.3em}
+.role b{color:var(--red2);font-weight:600}
+.caret{display:inline-block;width:2px;height:1em;background:var(--red2);vertical-align:-3px;margin-left:3px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hero p.lead{color:#a8b2ba}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:48px;padding:0 20px;border-radius:11px;font-weight:600;font-size:15px;text-decoration:none;border:1.5px solid #3a4148;color:#fff;transition:transform .15s,border-color .15s,background .15s}
+.btn:hover{transform:translateY(-1px);border-color:#6b747c}
+.btn.primary{background:var(--red);border-color:var(--red)}
+.btn.primary:hover{background:var(--red2);border-color:var(--red2)}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:focus-visible,.links a:focus-visible,.navcta:focus-visible,.copy:focus-visible,.chipbtn:focus-visible{outline:3px solid var(--red2);outline-offset:2px}
+.socials{display:flex;gap:10px;margin-top:22px}
+.socials a{width:44px;height:44px;border-radius:11px;border:1px solid #2c3338;display:grid;place-items:center;color:#cfd6dc}
+.socials a:hover{border-color:var(--red);color:#fff}
+.socials svg{width:19px;height:19px}
+.visual{position:relative;display:grid;justify-items:center}
+.portrait{position:relative;width:min(340px,78vw);aspect-ratio:1;border-radius:50%;padding:10px;background:conic-gradient(from 210deg,var(--red),#ff7ab0,#2a2f35 55%,var(--red));box-shadow:0 40px 80px -30px rgba(216,27,96,.5)}
+.portrait .inner{width:100%;height:100%;border-radius:50%;overflow:hidden;background:linear-gradient(160deg,#20262b,#0f1215);display:grid;place-items:center;border:6px solid var(--night)}
+.portrait img{width:100%;height:100%;object-fit:cover;display:block}
+.portrait img[hidden],.portrait .initials[hidden]{display:none}
+.portrait .initials{font:800 92px "Inter Tight",Inter,sans-serif;color:#3a4148;letter-spacing:-.04em}
+.badge{position:absolute;background:#14181b;border:1px solid #2c3338;color:#e7ecef;border-radius:14px;padding:10px 14px;font-size:13px;line-height:1.35;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.badge b{display:block;font:700 20px "Inter Tight",Inter,sans-serif;color:#fff}
+.b1{left:max(0px,calc(50% - 250px));top:10%}.b2{right:max(0px,calc(50% - 255px));top:38%}
+.b2 b{color:var(--red2)}
+.term{width:min(440px,100%);margin-top:-26px;position:relative;z-index:2;background:#0f1215;border:1px solid #2c3338;border-radius:14px;font:500 13px/1.7 "JetBrains Mono",ui-monospace,monospace;color:#cbd3d9;overflow:hidden}
+.term .top{display:flex;gap:6px;padding:9px 12px;border-bottom:1px solid #23282d}
+.term .top i{width:10px;height:10px;border-radius:50%;background:#3a4148}.term .top i:first-child{background:var(--red)}
+.term pre{margin:0;padding:12px 14px;overflow-x:auto;white-space:pre}
+.k{color:#ff8ab5}.s{color:#9fd3a8}.cm{color:#6b747c}
+.stats{background:var(--night);padding:0 max(5vw,18px) clamp(48px,6vw,80px)}
+.strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid #23282d;border-radius:18px;background:var(--night2);overflow:hidden}
+.strip div{padding:22px 24px;border-right:1px solid #23282d;color:#eef1f3}
+.strip div:last-child{border-right:0}
+.strip b{display:block;font:800 clamp(34px,4vw,48px)/1 "Inter Tight",Inter,sans-serif}
+.strip b em{font-style:normal;color:var(--red2)}
+.strip span{font-size:14px;color:#9aa4ac}
+.about{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:start}
+.facts{display:grid;gap:12px}
+.fact{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.fact .ic{width:40px;height:40px;border-radius:10px;background:var(--redSoft);color:var(--red);display:grid;place-items:center;flex:none}
+.fact .ic svg{width:20px;height:20px}
+.fact b{display:block}.fact span{color:var(--mute);font-size:14.5px}
+.values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+.values div{border-top:2px solid var(--red);padding-top:12px}
+.values b{font-family:"Inter Tight",Inter,sans-serif}.values p{margin:4px 0 0;color:var(--mute);font-size:14.5px}
+.case{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:34px}
+.case-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.case-top>div{padding:clamp(22px,3vw,38px)}
+.case-top>div+div{border-left:1px solid var(--line);background:color-mix(in srgb,var(--bg) 55%,var(--panel))}
+.tag{display:inline-block;align-self:flex-start;font-size:13px;font-weight:600;background:var(--redSoft);color:var(--red);padding:4px 11px;border-radius:999px}
+.case h3{font-size:clamp(24px,2.6vw,30px);margin:12px 0 4px}
+.pts{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.pts li{padding-left:24px;position:relative}
+.pts li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;border-radius:3px;background:var(--red)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.chips span{font-size:13px;border:1px solid var(--line);padding:4px 10px;border-radius:999px;background:var(--bg)}
+.fig{position:relative;aspect-ratio:16/11;margin-top:10px}
+.fig svg{position:absolute;inset:0;width:100%;height:100%}
+.slices{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line)}
+.slices li{padding:16px 18px;border-right:1px solid var(--line);font-size:14.5px;color:var(--mute)}
+.slices li:last-child{border-right:0}
+.slices b{display:block;font-family:"Inter Tight",Inter,sans-serif;font-size:15px;color:var(--ink)}
+.st{font-size:12.5px;font-weight:600;margin-top:4px}.done{color:#1a9a4a}.next{color:var(--red)}
+.more{display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-weight:600;color:var(--red);text-decoration:none}
+.more:hover{text-decoration:underline}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+.chipbtn{min-height:42px;padding:0 16px;border-radius:999px;border:1px solid var(--line);background:var(--panel);color:var(--ink);font:600 14px Inter,sans-serif;cursor:pointer}
+.chipbtn[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);box-shadow:0 22px 40px -28px rgba(0,0,0,.45);border-color:color-mix(in srgb,var(--red) 40%,var(--line))}
+.card .ico{width:44px;height:44px;border-radius:12px;background:var(--redSoft);color:var(--red);display:grid;place-items:center;margin-bottom:14px}
+.card .ico svg{width:22px;height:22px}
+.card p{color:var(--mute);margin:8px 0 0;font-size:15px}
+.card .more{margin-top:auto;padding-top:16px}
+.card[hidden]{display:none}
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:30px}
+.skills .card h3{display:flex;align-items:center;gap:10px}
+.skills .card h3 i{width:10px;height:10px;border-radius:3px;background:var(--red)}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:clamp(28px,5vw,60px)}
+.tl{list-style:none;margin:28px 0 0 7px;padding:0;border-left:2px solid var(--line)}
+.tl li{position:relative;padding:0 0 30px 28px}
+.tl li::before{content:"";position:absolute;left:-9px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--bg);border:3px solid var(--red)}
+.when{font-size:14px;color:var(--red);font-weight:600}
+.tl h3{margin-top:2px}
+.tl p{margin:6px 0 0;color:var(--mute)}
+.certs{display:grid;gap:12px;margin-top:28px}
+.cert{display:grid;grid-template-columns:48px minmax(0,1fr);gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.cert .seal{width:48px;height:48px;border-radius:50%;border:2px solid var(--red);display:grid;place-items:center;font:700 12px "Inter Tight",Inter,sans-serif;color:var(--red)}
+.cert span{display:block;color:var(--mute);font-size:14px}
+.contact{background:var(--night);color:#eef1f3}
+.contact h2{font-size:clamp(34px,5vw,60px)}
+.contact .lead{color:#a8b2ba}
+.crow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:34px}
+.c{background:var(--night2);border:1px solid #23282d;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:6px}
+.c small{color:#8e98a0;font-size:13px}
+.c a{color:#fff;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.c a:hover{color:var(--red2)}
+.copy{align-self:flex-start;margin-top:8px;min-height:40px;padding:0 13px;border-radius:9px;border:1px solid #3a4148;background:transparent;color:#eef1f3;font:600 13px Inter,sans-serif;cursor:pointer}
+footer{background:var(--night);color:#7d878f;font-size:14px;padding:22px max(5vw,18px);border-top:1px solid #1f2429}
+footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media(max-width:980px){.hero .wrap,.about,.two,.case-top{grid-template-columns:minmax(0,1fr)}.case-top>div+div{border-left:0;border-top:1px solid var(--line)}.grid,.skills{grid-template-columns:repeat(2,minmax(0,1fr))}.crow{grid-template-columns:repeat(2,minmax(0,1fr))}.slices{grid-template-columns:repeat(2,minmax(0,1fr))}.slices li:nth-child(2){border-right:0}.slices li:nth-child(-n+2){border-bottom:1px solid var(--line)}.links{display:none}}
+@media(max-width:600px){.grid,.skills,.crow,.values{grid-template-columns:minmax(0,1fr)}.strip{grid-template-columns:repeat(2,minmax(0,1fr))}.strip div:nth-child(2){border-right:0}.strip div:nth-child(-n+2){border-bottom:1px solid #23282d}.badge{display:none}.navcta{display:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pulse{display:none}.reveal{opacity:1;transform:none;transition:none}.caret{animation:none}.btn:hover,.card:hover{transform:none}}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#top"><span class="mono">AM</span>Asmaa Mostafa</a>
+  <div class="links"><a href="#about">About</a><a href="#bloodflow">BloodFlow</a><a href="#projects">Projects</a><a href="#skills">Skills</a><a href="#journey">Journey</a><a href="#contact">Contact</a></div>
+  <a class="navcta" href="Asmaa_Mostafa_CV.pdf" target="_blank" rel="noopener">View CV</a>
+</div></nav>
+
+<header class="band hero" id="top"><div class="wrap">
+  <div>
+    <div class="status"><i></i>Open to junior .NET backend roles &amp; internships</div>
+    <h1>Hi, I'm Asmaa<br>Mostafa<span>.</span></h1>
+    <div class="role">I build <b id="typed">secure REST APIs</b><span class="caret"></span></div>
+    <p class="lead">Junior Backend .NET Developer and Team Leader of BloodFlow — a 9-member graduation project that helps hospitals and blood banks across Egypt move blood before it expires. C#, ASP.NET Core, EF Core, SQL Server, Clean Architecture.</p>
+    <div class="btns">
+      <a class="btn primary" href="#bloodflow">See my work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn" href="Asmaa_Mostafa_CV.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 14h6M9 17h4"/></svg>View CV</a>
+    </div>
+    <div class="socials">
+      <a href="https://github.com/asmaa-mostafa25" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5Z"/></svg></a>
+      <a href="https://linkedin.com/in/asmaa-alnager" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.4 20.5h-3.6v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7H9.3V9h3.4v1.6h.1c.5-.9 1.6-1.8 3.4-1.8 3.6 0 4.3 2.4 4.3 5.5v6.2ZM5.3 7.4a2.1 2.1 0 1 1 0-4.2 2.1 2.1 0 0 1 0 4.2ZM7.1 20.5H3.5V9h3.6v11.5ZM22.2 0H1.8C.8 0 0 .8 0 1.7v20.6c0 .9.8 1.7 1.8 1.7h20.4c1 0 1.8-.8 1.8-1.7V1.7C24 .8 23.2 0 22.2 0Z"/></svg></a>
+      <a href="#contact" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="portrait"><div class="inner"><img id="photo" src="asmaa.jpg" alt="Asmaa Mostafa"><span class="initials" id="initials" hidden>AM</span></div></div>
+    <div class="badge b1"><b>Team Lead</b>BloodFlow · 9 members</div>
+    <div class="badge b2"><b>.NET 10</b>ASP.NET Core · EF Core</div>
+    <div class="term" aria-label="Sample API requests">
+      <div class="top"><i></i><i></i><i></i></div>
+<pre><span class="k">POST</span> /api/auth/login       <span class="s">200 OK</span>
+<span class="k">POST</span> /api/requests         <span class="s">201 Created</span>
+<span class="cm">// FEFO reservation · role: HospitalStaff</span>
+<span class="k">GET </span> /api/lookups/blood-groups <span class="s">200 OK</span></pre>
+    </div>
+  </div>
+</div></header>
+
+<section class="stats" aria-label="BloodFlow in numbers"><div class="wrap strip">
+  <div><b>9</b><span>team members I lead</span></div>
+  <div><b>53<em>+</em></b><span>REST endpoints built</span></div>
+  <div><b>40</b><span>xUnit tests in CI</span></div>
+  <div><b>27</b><span>governorates covered</span></div>
+</div></section>
+
+<section class="band reveal" id="about"><div class="wrap about">
+  <div>
+    <div class="kicker">About me</div>
+    <h2>Engineering mindset, backend focus.</h2>
+    <p class="lead">I'm a Communications and Computer Engineering student who found her place in backend development — where systems have to behave predictably, keep data correct and stay secure. I like turning a messy real-world requirement into a clean API with clear rules, and I enjoy leading a team to ship it.</p>
+    <div class="values">
+      <div><b>Security first</b><p>Auth, roles and validation designed in from day one.</p></div>
+      <div><b>Clean structure</b><p>Clean Architecture, SOLID, small testable services.</p></div>
+      <div><b>Team player</b><p>Leading, reviewing PRs and writing the docs.</p></div>
+    </div>
+  </div>
+  <div class="facts">
+    <div class="fact"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 10-10-5-10 5 10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div><div><b>B.Sc. Communications &amp; Computer Engineering</b><span>Higher Institute of Engineering and Technology, Tanta · expected 2027</span></div></div>
+    <div class="fact"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="m8.5 12.5-1.5 9 5-3 5 3-1.5-9"/></svg></div><div><b>DEPI · Full Stack .NET</b><span>Digital Egypt Pioneers Initiative · Nov 2025 – Jul 2026</span></div></div>
+    <div class="fact"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.4-7-11a7 7 0 0 1 14 0c0 6.6-7 11-7 11Z"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><b>Egypt</b><span>On-site, hybrid or remote</span></div></div>
+    <div class="fact"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M9 3v2M5 5c0 5 4 9 9 10M13 5c0 4-3 8-8 10"/><path d="m13 21 4-9 4 9M14.5 18h5"/></svg></div><div><b>Arabic (native) · English (B1–B2)</b><span>DEPI Business English Track completed</span></div></div>
+  </div>
+</div></section>
+
+<section class="band reveal" id="bloodflow" style="padding-top:0"><div class="wrap">
+  <div class="kicker">Featured case study</div>
+  <h2>BloodFlow — moving blood before it expires.</h2>
+  <p class="lead">Hospitals run short of blood while units expire in other banks. BloodFlow connects hospitals, blood banks, donors and recipients across Egypt, tracks every batch, and reserves the units that expire first.</p>
+  <div class="case">
+    <div class="case-top">
+      <div>
+        <span class="tag">Graduation project · Team Leader &amp; Backend</span>
+        <h3>What I built</h3>
+        <ul class="pts">
+          <li>Leading a 9-member team across backend, frontend, UI/UX and AI, and owning the ASP.NET Core Web API.</li>
+          <li>Four-layer Clean Architecture: Domain, Application, Infrastructure, Api.</li>
+          <li>Identity + JWT with 5 roles, account lockout, staff approval workflow, audit log and an active-account check on every request.</li>
+          <li>Batch inventory with a stock ledger, scheduled expiry job and FEFO reservations for normal and emergency requests.</li>
+          <li>Integration with our AI service for demand forecasting, shortage and expiry alerts.</li>
+          <li>RFC 9457 ProblemDetails errors; GitHub Actions runs build, tests and a vulnerable-package check on every PR.</li>
+        </ul>
+        <div class="chips"><span>.NET 10</span><span>ASP.NET Core</span><span>EF Core 10</span><span>SQL Server</span><span>Identity + JWT</span><span>xUnit</span><span>GitHub Actions</span></div>
+        <a class="more" href="https://github.com/asmaa-mostafa25/BloodFlow" target="_blank" rel="noopener">View the repository →</a>
+      </div>
+      <div>
+        <b style="font-family:'Inter Tight',Inter,sans-serif">Architecture</b>
+        <div class="fig"><svg viewBox="0 0 480 330" role="img" aria-label="Clean Architecture: Api uses Application and Infrastructure; Infrastructure implements Application; Application depends on Domain; Infrastructure talks to SQL Server">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2f35"/><stop offset="1" stop-color="#121417"/></linearGradient>
+            <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff4d8d"/><stop offset="1" stop-color="#b0124c"/></linearGradient>
+            <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#8a949c"/></marker>
+          </defs>
+          <g font-family="Inter,sans-serif">
+            <rect x="15" y="10" width="450" height="62" rx="14" fill="url(#g1)"/>
+            <text x="35" y="38" fill="#fff" font-size="17" font-weight="700">Api</text>
+            <text x="35" y="58" fill="#a3adb5" font-size="12.5">Controllers · JWT · ProblemDetails</text>
+            <rect x="335" y="25" width="112" height="32" rx="8" fill="#d81b60"/><text x="391" y="46" fill="#fff" font-size="12.5" font-weight="600" text-anchor="middle">53 endpoints</text>
+            <rect x="15" y="108" width="214" height="88" rx="14" fill="#fff" stroke="#c6cdd3"/>
+            <text x="35" y="137" fill="#0d0f11" font-size="17" font-weight="700">Application</text>
+            <text x="35" y="158" fill="#525c65" font-size="12.5">Interfaces · DTOs</text>
+            <text x="35" y="176" fill="#525c65" font-size="12.5">Result · business rules</text>
+            <rect x="251" y="108" width="214" height="88" rx="14" fill="#fff" stroke="#c6cdd3"/>
+            <text x="271" y="137" fill="#0d0f11" font-size="17" font-weight="700">Infrastructure</text>
+            <text x="271" y="158" fill="#525c65" font-size="12.5">EF Core · Identity</text>
+            <text x="271" y="176" fill="#525c65" font-size="12.5">Services · expiry job</text>
+            <rect x="15" y="234" width="214" height="82" rx="14" fill="url(#g2)"/>
+            <text x="35" y="265" fill="#fff" font-size="17" font-weight="700">Domain</text>
+            <text x="35" y="286" fill="#ffe0ec" font-size="12.5">Entities · Enums</text>
+            <text x="35" y="303" fill="#ffe0ec" font-size="12.5">no dependencies</text>
+            <ellipse cx="358" cy="246" rx="80" ry="14" fill="#d5dbe0" stroke="#8a949c"/>
+            <path d="M278 246v56c0 8 36 14 80 14s80-6 80-14v-56" fill="#d5dbe0" stroke="#8a949c"/>
+            <ellipse cx="358" cy="246" rx="80" ry="14" fill="#eef1f3" stroke="#8a949c"/>
+            <text x="358" y="284" fill="#0d0f11" font-size="15" font-weight="700" text-anchor="middle">SQL Server</text>
+            <text x="358" y="303" fill="#525c65" font-size="12" text-anchor="middle">EF Core migrations</text>
+            <g stroke="#8a949c" stroke-width="2" fill="none" marker-end="url(#ar)">
+              <path d="M122 72v32"/><path d="M358 72v32"/><path d="M251 152h-18"/><path d="M122 196v34"/><path d="M358 196v34"/>
+            </g>
+            <circle class="pulse" r="7" fill="#d81b60" stroke="#fff" stroke-width="2.5">
+              <animateMotion dur="4.5s" repeatCount="indefinite" path="M122 41 V152 H358 V280 V152 H122 V41"/>
+            </circle>
+          </g>
+        </svg></div>
+      </div>
+    </div>
+    <ul class="slices">
+      <li><b>Foundation &amp; Admin</b>Identity, JWT, staff, organizations, audit<div class="st done">● Done</div></li>
+      <li><b>Blood Bank</b>Batches, stock ledger, expiry job<div class="st done">● Done</div></li>
+      <li><b>Hospital &amp; AI</b>Requests, FEFO, emergencies, forecasting<div class="st done">● Done</div></li>
+      <li><b>Donors &amp; more</b>Donations, recipients, transfers, alerts<div class="st next">● Next</div></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="band reveal" id="projects" style="padding-top:0"><div class="wrap">
+  <div class="kicker">Projects</div>
+  <h2>More things I've built.</h2>
+  <div class="filters" role="group" aria-label="Filter projects">
+    <button class="chipbtn" type="button" aria-pressed="true" data-f="all">All</button>
+    <button class="chipbtn" type="button" aria-pressed="false" data-f="api">Web API</button>
+    <button class="chipbtn" type="button" aria-pressed="false" data-f="mvc">MVC</button>
+    <button class="chipbtn" type="button" aria-pressed="false" data-f="front">Frontend</button>
+  </div>
+  <div class="grid" id="grid"></div>
+</div></section>
+
+<section class="band reveal" id="skills" style="padding-top:0"><div class="wrap">
+  <div class="kicker">Skills</div>
+  <h2>My toolbox.</h2>
+  <div class="skills" id="skillgrid"></div>
+</div></section>
+
+<section class="band reveal" id="journey" style="padding-top:0"><div class="wrap two">
+  <div>
+    <div class="kicker">Journey</div>
+    <h2>Experience &amp; training.</h2>
+    <ul class="tl">
+      <li><div class="when">2026 – 2027 · Graduation project</div><h3>Team Leader &amp; Backend Developer · BloodFlow</h3><p>Leading a 9-member team; building the ASP.NET Core API slice by slice through reviewed pull requests with CI.</p></li>
+      <li><div class="when">Nov 2025 – Jul 2026</div><h3>Full Stack .NET Developer Trainee · DEPI</h3><p>RESTful APIs with versioning, structured exception handling and Swagger; Clean Architecture and the Repository Pattern in Agile sprints with peer code reviews.</p></li>
+      <li><div class="when">Feb – Oct 2025</div><h3>Backend .NET Development Diploma · ITI</h3><p>C# and OOP, ASP.NET Core MVC, EF Core and LINQ through weekly labs and projects.</p></li>
+      <li><div class="when">Mentorship program · Mansoura</div><h3>Backend .NET Developer Trainee · CodeWay</h3><p>Backend projects in a mentored team tracked in Azure DevOps; built the team LMS authentication module.</p></li>
+    </ul>
+  </div>
+  <div>
+    <div class="kicker">Certificates</div>
+    <h2>Certified learning.</h2>
+    <div class="certs">
+      <div class="cert"><div class="seal">DEPI</div><div><b>Full Stack .NET Web Developer</b><span>Digital Egypt Pioneers Initiative · Certificate of Achievement · 2026</span></div></div>
+      <div class="cert"><div class="seal">DEPI</div><div><b>Business English Track</b><span>Digital Egypt Pioneers Initiative · Round 4 · 2026</span></div></div>
+      <div class="cert"><div class="seal">ITI</div><div><b>Backend .NET Development Diploma</b><span>Information Technology Institute (Affiliate) · 2025</span></div></div>
+      <div class="cert"><div class="seal">IPA</div><div><b>Backend – ASP.NET Web Development</b><span>International Professionalism Academy · 120 h · Distinction · 2025</span></div></div>
+      <div class="cert"><div class="seal">NTI</div><div><b>Web Designer Track</b><span>National Telecommunication Institute · 120 h · 2025</span></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="band contact" id="contact"><div class="wrap">
+  <div class="kicker">Contact</div>
+  <h2>Let's build something reliable together.</h2>
+  <p class="lead">I'm looking for a junior .NET backend role or internship — on-site in Egypt, hybrid or remote. Email is the fastest way to reach me.</p>
+  <div class="crow">
+    <div class="c"><small>Email</small><a href="mailto:asmaaalnager2332004@gmail.com">asmaaalnager2332004@gmail.com</a><button class="copy" id="copyEmail" type="button">Copy email</button></div>
+    <div class="c"><small>LinkedIn</small><a href="https://linkedin.com/in/asmaa-alnager" target="_blank" rel="noopener">linkedin.com/in/asmaa-alnager</a></div>
+    <div class="c"><small>GitHub</small><a href="https://github.com/asmaa-mostafa25" target="_blank" rel="noopener">github.com/asmaa-mostafa25</a></div>
+    <div class="c"><small>CV</small><a href="Asmaa_Mostafa_CV.pdf" target="_blank" rel="noopener">Asmaa_Mostafa_CV.pdf</a></div>
+  </div>
+</div></section>
+<footer><div class="wrap"><span>© 2026 Asmaa Mostafa Mohamed</span><span>Backend .NET Developer · Egypt</span></div></footer>
+
+<script>
+{
+  const I={api:'<path d="M4 7h16M4 12h16M4 17h10"/>',lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',cart:'<circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M3 4h2l2.5 11h11L21 8H6.5"/>',pill:'<path d="m10.5 20.5-7-7a5 5 0 0 1 7-7l7 7a5 5 0 0 1-7 7Z"/><path d="m8.5 8.5 7 7"/>',plane:'<path d="M2 16l20-8-8 14-3-6z"/>',users:'<circle cx="9" cy="8" r="4"/><path d="M2 21a7 7 0 0 1 14 0M17 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6"/>'};
+  const P=[
+    {t:'CourseOnline.Auth',f:'api',i:'lock',d:'Authentication service for an LMS: registration, login and email/SMS verification with JWT, OAuth 2.0, RBAC and BCrypt. Dapper for reads, EF Core for migrations.',c:['ASP.NET Core','Dapper','JWT','OAuth 2.0'],u:'https://github.com/asmaa-mostafa25/CourseOnline-ASP.NET-Core'},
+    {t:'Go-To-Travel Auth API',f:'api',i:'plane',d:'Auth and user management for a travel platform: JWT login, Google sign-in, email activation and password reset, roles and permissions. Secrets kept in environment variables.',c:['Identity','JWT','Google OAuth','MailKit'],u:'https://github.com/asmaa-mostafa25/go-to-travel-Api'},
+    {t:'E-Commerce Auth API',f:'api',i:'api',d:'Registration, login, email activation, password reset, roles and per-user permissions for an online store.',c:['Web API','Identity','EF Core'],u:'https://github.com/asmaa-mostafa25/ECOMMERCEAPI'},
+    {t:'E-Commerce MVC',f:'mvc',i:'cart',d:'Product catalog, cart, checkout and PayPal payments, with Admin and Customer roles and a dashboard for products, categories and orders.',c:['ASP.NET Core MVC','EF Core','PayPal'],u:'https://github.com/asmaa-mostafa25/EcommerceMVC'},
+    {t:'Employee Management + Identity',f:'mvc',i:'users',d:'Employees and departments with ASP.NET Core Identity, custom middleware, cookies, sessions, custom validation attributes and a dashboard.',c:['MVC','Identity','Middleware'],u:'https://github.com/asmaa-mostafa25/EmployeeDeplab5'},
+    {t:'EgyMediChain',f:'front',i:'pill',d:'Pharmaceutical supply-chain platform for the Ministry of Health. I started the project, wrote the requirements and DB design, and built the React app with role-based access for 5 roles.',c:['React','Vite','Zustand','Recharts'],u:'https://github.com/asmaa-mostafa25/egy-medichain-pharmaceutical-system'}
+  ];
+  const esc=s=>String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const grid=document.getElementById('grid');
+  grid.innerHTML=P.map(p=>`<article class="card" data-f="${p.f}"><div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">${I[p.i]}</svg></div><h3>${esc(p.t)}</h3><p>${esc(p.d)}</p><div class="chips">${p.c.map(x=>`<span>${esc(x)}</span>`).join('')}</div><a class="more" href="${p.u}" target="_blank" rel="noopener">Repository →</a></article>`).join('');
+  document.querySelectorAll('.chipbtn').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.chipbtn').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    const f=b.dataset.f;grid.querySelectorAll('.card').forEach(c=>{c.hidden=!(f==='all'||c.dataset.f===f)});
+  }));
+  const S=[
+    ['Languages & core',['C#','OOP','LINQ','Async / Await','Exception handling']],
+    ['Backend',['ASP.NET Core Web API','ASP.NET Core MVC','.NET 8 / 10','REST API design','Swagger / OpenAPI']],
+    ['Data',['SQL Server','EF Core (Code-First, migrations)','Dapper','Stored procedures']],
+    ['Security',['JWT','OAuth 2.0','ASP.NET Core Identity','RBAC','BCrypt']],
+    ['Architecture',['Clean Architecture','SOLID','Repository Pattern','Dependency Injection']],
+    ['Testing & teamwork',['xUnit','GitHub Actions','Git & pull requests','Postman','Azure DevOps','Agile / Scrum']]
+  ];
+  document.getElementById('skillgrid').innerHTML=S.map(([h,l])=>`<div class="card"><h3><i></i>${esc(h)}</h3><div class="chips">${l.map(x=>`<span>${esc(x)}</span>`).join('')}</div></div>`).join('');
+  const img=document.getElementById('photo'),ini=document.getElementById('initials');
+  const noPhoto=()=>{img.hidden=true;ini.hidden=false};
+  img.addEventListener('error',noPhoto);if(img.complete&&!img.naturalWidth)noPhoto();
+  const nav=document.getElementById('nav');const onS=()=>nav.classList.toggle('solid',scrollY>30);addEventListener('scroll',onS,{passive:true});onS();
+  const words=['secure REST APIs','clean architectures','reliable backends','teams that ship'];
+  const el=document.getElementById('typed');
+  if(!matchMedia('(prefers-reduced-motion: reduce)').matches){let w=0,i=words[0].length,del=true;
+    const tick=()=>{if(del){i--;if(i<=0){del=false;w=(w+1)%words.length}}else{i++;if(i>=words[w].length){el.textContent=words[w];del=true;setTimeout(tick,1700);return}}el.textContent=words[w].slice(0,Math.max(i,0));setTimeout(tick,del?40:75)};
+    setTimeout(tick,1800)}
+  if('IntersectionObserver' in window){const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.05});document.querySelectorAll('.reveal').forEach(s=>io.observe(s))}else document.querySelectorAll('.reveal').forEach(s=>s.classList.add('in'));
+  const b=document.getElementById('copyEmail');
+  b.addEventListener('click',async()=>{try{await navigator.clipboard.writeText('asmaaalnager2332004@gmail.com');b.textContent='Copied ✓'}catch(e){b.textContent='Select the address above'}setTimeout(()=>{b.textContent='Copy email'},2200)});
+}
+</script>
+</body>
+</html>
